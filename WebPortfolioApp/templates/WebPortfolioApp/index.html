@@ -1,0 +1,26 @@
+{% extends 'WebPortfolioApp/base.html' %}
+
+
+{% block content %}
+    <div class="container">
+            {% for p in projects %}
+                <div class="row class-proj">
+                    <div class="col-1 mx-auto">
+                        {% if p.upload_img %}
+                        <div class="proj-img"><img src="{{ p.upload_img.url }}"></div>
+                        {% endif %}
+                    </div>
+                <div class="col-5 mx-auto">
+                    <h2>{{p.title}}</h2>
+                {% autoescape on %}
+                {{p.descr|linebreaks|truncatewords:50}}
+                {% endautoescape %}
+                        <div></div>
+                        <a href="#" class="btn btn-outline-primary">Просмотреть</a>
+                </div>
+                </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
