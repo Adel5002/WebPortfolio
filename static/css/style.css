@@ -1,10 +1,19 @@
+
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
 .proj-img img {
     height: 0 auto;
-    width: 350px;
+    max-width: 350px;
     border: 1.5px solid;
     border-radius: 10px;
 
 }
+
+
 
 a.btn.btn-outline-primary {
     float: right;
@@ -27,6 +36,37 @@ a.page-link {
 .page-item.page-num-selected {
     background-color: #89CFF0;
     color: #ffffff;
+}
 
+ul.sub-link {
+    position: absolute;
+    background: #ffffff;
+    display: none;
+}
+
+ul.sub-link li {
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0);
+    border-right: 1px solid rgba(0, 0, 0);
+    border-left: 1px solid rgba(0, 0, 0);
+    list-style: none;
+    border-radius: 2px;
+}
+
+ul.sub-link li a:hover {
+    background: #000000;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+
+ul li:hover > ul {
+    display: initial;
+}
+
+img.detail-img {
+    height: auto;
+    max-width: 1000px;
+    border-radius: 10px;
 }
 

@@ -16,7 +16,7 @@
                 {{p.descr|linebreaks|truncatewords:50}}
                 {% endautoescape %}
                         <div></div>
-                        <a href="#" class="btn btn-outline-primary">Просмотреть</a>
+                        <a href="{{ p.get_absolute_url }}" class="btn btn-outline-primary">Просмотреть</a>
                 </div>
                 </div>
         {% endfor %}

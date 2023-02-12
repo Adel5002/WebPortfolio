@@ -1,0 +1,22 @@
+{% extends 'WebPortfolioApp/base.html' %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center mb-5">{{ project.title }}</h1>
+            <div class="col-sm mx-auto">
+                {% if project.upload_img %}
+                    <div class="proj-img d-flex justify-content-center mb-5"><img class="detail-img" src="{{ project.upload_img.url }}"></div>
+                {% endif %}
+            </div>
+            <div class="col-8 mx-auto">
+                {{ project.descr|linebreaks }}
+                {% if project.upload %}
+                    <div class="proj-img d-flex justify-content-center mt-5"><img class="detail-img" src="{{ project.upload.url }}"></div>
+                {% endif %}
+                    <div class="d-flex justify-content-center mt-5 mb-5"><p style="font-size: 18px; color: #7B68EE;">Ссылка на репозиторий Git: &nbsp;</p><a href="{{ project.git_url }}">Git Code</a></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
