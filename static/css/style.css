@@ -5,6 +5,18 @@ a {
     color: #000000;
 }
 
+
+.register-style a.nav-link {
+    display: inline;
+}
+
+.register-style {
+    margin-top: 6.9px;
+    margin-left: 20px;
+    font-size: 19px;
+}
+
+
 .proj-img img {
     height: 0 auto;
     max-width: 350px;
@@ -69,4 +81,6 @@ img.detail-img {
     max-width: 1000px;
     border-radius: 10px;
 }
+
+
 
