@@ -17,6 +17,19 @@
                 {% endif %}
                     <div class="d-flex justify-content-center mt-5 mb-5"><p style="font-size: 18px; color: #7B68EE;">Ссылка на репозиторий Git: &nbsp;</p><a href="{{ project.git_url }}">Git Code</a></div>
             </div>
+            <form action="{% url 'like_project' project.slug %}" method="POST">
+                {% csrf_token %}
+            {% if user.is_authenticated %}
+                {% if liked %}
+                    <button type="submit" class="btn btn-danger" name="project_id" value="{{project.id}}">Unlike</button>
+                {% else %}
+                    <button type="submit" class="btn btn-primary" name="project_id" value="{{project.id}}">Like</button>
+                {% endif %}
+            {% else %}
+                <small><a href="{% url 'login' %}">Login</a> to like</small>
+            {% endif %}
+                · {{ total_likes }} Likes
+            </form>
         </div>
     </div>
 {% endblock %}
