@@ -7,8 +7,8 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 from django.urls import reverse
 
-from .forms import RegisterUserForm, LoginUserForm
-from .models import PortfolioStructure
+from .forms import RegisterUserForm, LoginUserForm, CommentForm
+from .models import PortfolioStructure, Comment
 
 
 class ListProjects(ListView):
@@ -38,6 +38,7 @@ class ProjectDetail(DetailView):
         context['liked'] = liked
         return context
 
+
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
     template_name = 'WebPortfolioApp/register_popup.html'
@@ -56,6 +57,7 @@ def logout_user(request):
     logout(request)
     return redirect('login')
 
+
 @login_required
 def like_view(request, proj_slug):
     project = get_object_or_404(PortfolioStructure, id=request.POST.get('project_id'))
@@ -68,3 +70,16 @@ def like_view(request, proj_slug):
         liked = True
 
     return HttpResponseRedirect(reverse('project', args=[str(proj_slug)]))
+
+
+class AddComment(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'WebPortfolioApp/add_comment.html'
+
+    def form_valid(self, form):
+        form.instance.project = PortfolioStructure.objects.get(slug=self.kwargs['proj_slug'])
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('project', kwargs={'proj_slug': self.object.project.slug})

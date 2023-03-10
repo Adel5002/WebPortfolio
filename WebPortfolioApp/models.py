@@ -26,4 +26,15 @@ class PortfolioStructure(models.Model):
         ordering = ['id']
 
 
+class Comment(models.Model):
+    project = models.ForeignKey(PortfolioStructure, related_name='comments', on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    body = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '%s - %s' % (self.project.title, self.name)
+
+
+
 

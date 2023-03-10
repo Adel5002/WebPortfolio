@@ -1,4 +1,4 @@
-{% extends 'WebPortfolioApp/base.html' %}
+    {% extends 'WebPortfolioApp/base.html' %}
 
 
 {% block content %}
@@ -30,6 +30,26 @@
             {% endif %}
                 · {{ total_likes }} Likes
             </form>
+            <hr class="mt-3">
+            <h2 class="mb-4">Comments...</h2>
+            {% if not project.comments.all %}
+                No Comments Yet...<div class="mb-4"><a class="link-primary" href="{% url 'add_comment' project.slug %}">Add comment</a></div>
+
+            {% else %}
+            <div class="mb-3"><a class="link-primary" href="{% url 'add_comment' project.slug %}">Add comment</a></div>
+
+                {% for comment in project.comments.all %}
+                <strong>
+                    {{ comment.name }} -
+                    {{ comment.date_added }}
+                </strong>
+                <br>
+                <p>{{ comment.body }}</p>
+                <br>
+                <br>
+                {% endfor %}
+            {% endif %}
+
         </div>
     </div>
 {% endblock %}

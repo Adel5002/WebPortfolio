@@ -9,3 +9,4 @@ class PortfolioAdmin(admin.ModelAdmin):
 
 
 admin.site.register(PortfolioStructure, PortfolioAdmin)
+admin.site.register(Comment)
