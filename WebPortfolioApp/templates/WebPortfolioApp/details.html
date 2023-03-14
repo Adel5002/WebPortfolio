@@ -42,9 +42,12 @@
                 <strong>
                     {{ comment.name }} -
                     {{ comment.date_added }}
+                    <a class="fw-normal link-primary" href="{% url 'edit_comment' comment.pk %}">[edit]</a>
+                    <a class="fw-normal link-primary" href="{% url 'delete_comment' comment.pk %}">[delete]</a>
                 </strong>
                 <br>
                 <p>{{ comment.body }}</p>
+
                 <br>
                 <br>
                 {% endfor %}

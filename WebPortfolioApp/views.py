@@ -4,7 +4,7 @@ from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse
 
 from .forms import RegisterUserForm, LoginUserForm, CommentForm
@@ -83,3 +83,21 @@ class AddComment(CreateView):
 
     def get_success_url(self):
         return reverse('project', kwargs={'proj_slug': self.object.project.slug})
+
+
+class EditComment(UpdateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'WebPortfolioApp/edit_comment.html'
+
+    def get_success_url(self):
+        return reverse('project', kwargs={'proj_slug': self.object.project.slug})
+
+
+class DeleteComment(DeleteView):
+    model = Comment
+    template_name = 'WebPortfolioApp/delete_comment.html'
+
+    def get_success_url(self):
+        return reverse('project', kwargs={'proj_slug': self.object.project.slug})
+

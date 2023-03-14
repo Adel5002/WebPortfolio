@@ -1,0 +1,21 @@
+{% extends 'WebPortfolioApp/base.html' %}
+
+{% block title %}Delete An Comment{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <h1 class="mb-5">Delete Comment...</h1>
+            <div class="form-group">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <strong>Are u sure?</strong>
+                    <button class=" mt-3 btn btn-primary">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
