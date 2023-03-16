@@ -27,6 +27,7 @@ class ProjectDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProjectDetail, self).get_context_data()
 
+
         stuff = get_object_or_404(PortfolioStructure, slug=self.kwargs['proj_slug'])
         total_likes = stuff.total_likes()
 
@@ -34,9 +35,11 @@ class ProjectDetail(DetailView):
         if stuff.likes.filter(id=self.request.user.id).exists():
             liked = True
 
+
         context['total_likes'] = total_likes
         context['liked'] = liked
         return context
+
 
 
 class RegisterUser(CreateView):
@@ -79,6 +82,9 @@ class AddComment(CreateView):
 
     def form_valid(self, form):
         form.instance.project = PortfolioStructure.objects.get(slug=self.kwargs['proj_slug'])
+        comments = form.save(commit=False)
+        comments.commentator = self.request.user
+        comments.save()
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -90,6 +96,8 @@ class EditComment(UpdateView):
     form_class = CommentForm
     template_name = 'WebPortfolioApp/edit_comment.html'
 
+
+
     def get_success_url(self):
         return reverse('project', kwargs={'proj_slug': self.object.project.slug})
 
@@ -97,6 +105,8 @@ class EditComment(UpdateView):
 class DeleteComment(DeleteView):
     model = Comment
     template_name = 'WebPortfolioApp/delete_comment.html'
+
+
 
     def get_success_url(self):
         return reverse('project', kwargs={'proj_slug': self.object.project.slug})

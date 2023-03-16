@@ -36,14 +36,19 @@
                 No Comments Yet...<div class="mb-4"><a class="link-primary" href="{% url 'add_comment' project.slug %}">Add comment</a></div>
 
             {% else %}
+            {% if user.is_authenticated %}
             <div class="mb-3"><a class="link-primary" href="{% url 'add_comment' project.slug %}">Add comment</a></div>
-
+            {% else  %}
+            <div class="mb-3"><a class="link-primary" href="{% url 'login' %}">Login to add comment</a></div>
+            {% endif %}
                 {% for comment in project.comments.all %}
                 <strong>
                     {{ comment.name }} -
                     {{ comment.date_added }}
-                    <a class="fw-normal link-primary" href="{% url 'edit_comment' comment.pk %}">[edit]</a>
-                    <a class="fw-normal link-primary" href="{% url 'delete_comment' comment.pk %}">[delete]</a>
+                    {% if user == comment.commentator %}
+                            <a class="fw-normal link-primary" href="{% url 'edit_comment' comment.pk %}">[edit]</a>
+                            <a class="fw-normal link-primary" href="{% url 'delete_comment' comment.pk %}">[delete]</a>
+                    {% endif %}
                 </strong>
                 <br>
                 <p>{{ comment.body }}</p>

@@ -30,6 +30,7 @@ class Comment(models.Model):
     project = models.ForeignKey(PortfolioStructure, related_name='comments', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     body = models.TextField()
+    commentator = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
