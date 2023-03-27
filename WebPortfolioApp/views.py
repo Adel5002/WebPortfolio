@@ -1,6 +1,7 @@
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -25,8 +26,17 @@ class ProjectDetail(DetailView):
     context_object_name = 'project'
 
     def get_context_data(self, **kwargs):
-        context = super(ProjectDetail, self).get_context_data()
+        context = super().get_context_data(**kwargs)
 
+        context["other_user_comments"] = Comment.objects.all().order_by('id')
+        paginator = Paginator(context["other_user_comments"], 2)
+        page_two = self.request.GET.get("other-page")
+        try:
+            context["other_user_comments"] = paginator.page(page_two)
+        except PageNotAnInteger:
+            context["other_user_comments"] = paginator.page(1)
+        except EmptyPage:
+            context["other_user_comments"] = paginator.page(paginator.num_pages)
 
         stuff = get_object_or_404(PortfolioStructure, slug=self.kwargs['proj_slug'])
         total_likes = stuff.total_likes()
@@ -34,7 +44,6 @@ class ProjectDetail(DetailView):
         liked = False
         if stuff.likes.filter(id=self.request.user.id).exists():
             liked = True
-
 
         context['total_likes'] = total_likes
         context['liked'] = liked
