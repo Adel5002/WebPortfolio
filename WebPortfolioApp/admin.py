@@ -1,12 +1,19 @@
 from django.contrib import admin
 from .models import *
-
-class PortfolioAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'upload_img')
-    search_fields = ('title', 'descr')
-    list_display_links = ('id', 'title')
-    prepopulated_fields = {'slug': ('title',)}
+from modeltranslation.admin import TranslationAdmin
 
 
-admin.site.register(PortfolioStructure, PortfolioAdmin)
+# class PortfolioAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'title', 'upload_img')
+#     search_fields = ('title', 'descr')
+#     list_display_links = ('id', 'title')
+#     prepopulated_fields = {'slug': ('title',)}
+
+
+class PortfolioTrans(TranslationAdmin):
+    model = PortfolioStructure
+
+
+admin.site.register(PortfolioStructure, PortfolioTrans)
 admin.site.register(Comment)
+

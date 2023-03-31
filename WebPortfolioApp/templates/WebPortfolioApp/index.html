@@ -1,7 +1,10 @@
 {% extends 'WebPortfolioApp/base.html' %}
 
+{% load i18n %}
 
 {% block content %}
+
+
     <div class="container">
             {% for p in projects %}
                 <div class="row class-proj">
@@ -16,7 +19,7 @@
                 {{p.descr|linebreaks|truncatewords:50}}
                 {% endautoescape %}
                         <div></div>
-                        <a href="{{ p.get_absolute_url }}" class="btn btn-outline-primary">Просмотреть</a>
+                        <a href="{{ p.get_absolute_url }}" class="btn btn-outline-primary">{% trans "Look at" %}</a>
                 </div>
                 </div>
         {% endfor %}

@@ -2,8 +2,8 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, get_object_or_404
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import redirect, get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse
@@ -17,6 +17,8 @@ class ListProjects(ListView):
     model = PortfolioStructure
     template_name = 'WebPortfolioApp/index.html'
     context_object_name = 'projects'
+
+
 
 
 class ProjectDetail(DetailView):
