@@ -22,6 +22,9 @@
 
               <ul class="nav nav-pills">
                 <li class="nav-item">
+                    <button class="theme-button" id="toggleThemeBtn"><img class="theme-icon" id="icon" src="{% static 'images/moon.png' %}"></button>
+                </li>
+                <li class="nav-item">
                         <form class="nav-link" action="{% url 'set_language' %}" method="POST"> {% csrf_token %} <!-- Не забываем по csrf_token для POST запросов -->
                             <input type="hidden" name="next" value="{{ redirect_to }}">
                             {% get_current_language as LANGUAGE_CODE %}
@@ -85,6 +88,8 @@
     </ul>
 </nav>
 {% endif %}
+
+<script src="{% static 'js/scripts.js' %}"></script>
 
 <!--{% block js %}-->
 <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>-->

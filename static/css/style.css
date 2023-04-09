@@ -83,4 +83,26 @@ img.detail-img {
 }
 
 
+.theme-icon {
+    width: 40px;
+    cursor: pointer;
 
+}
+
+
+#toggleThemeBtn {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+}
+
+
+body.dark {
+    background: #222222;
+    color: #ffffff;
+}
+body.dark .nav-link {
+    color: white;
+}
+body.dark span {
+    color: white;
+}
